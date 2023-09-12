@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApp0", "ServerApp0\ServerApp0.csproj", "{95441377-18F8-4A55-AE3A-08E14047BFEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApp0", "ServerApp0\ServerApp0.csproj", "{95441377-18F8-4A55-AE3A-08E14047BFEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexPiBlazor", "AlexPiBlazor\AlexPiBlazor.csproj", "{09AFC189-E0CA-4F56-80CC-AAA648EED5E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{95441377-18F8-4A55-AE3A-08E14047BFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95441377-18F8-4A55-AE3A-08E14047BFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95441377-18F8-4A55-AE3A-08E14047BFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09AFC189-E0CA-4F56-80CC-AAA648EED5E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AFC189-E0CA-4F56-80CC-AAA648EED5E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AFC189-E0CA-4F56-80CC-AAA648EED5E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AFC189-E0CA-4F56-80CC-AAA648EED5E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
