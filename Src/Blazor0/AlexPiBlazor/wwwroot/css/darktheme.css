@@ -40,23 +40,21 @@ Change these CSS colors from light to dark theme
   --bs-danger-rgb: 153,35,47;
   --bs-light-rgb: 123,124,126;
   --bs-dark-rgb: 0,0,0;
-  --bs-white-rgb: 0,0,0;        /* Changed white to black for dark theme */
-  --bs-black-rgb: 255,255,255;  /* Changed black to white for dark theme */
-  --bs-body-rgb: 0,0,0;         /* Changed body color to black for dark theme */
+  --bs-white-rgb: 0,0,0;
+  --bs-black-rgb: 255,255,255;
+  --bs-body-rgb: 0,0,0;
   --bs-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
-  --bs-body-color: #ffffff;     /* Changed body color to white for dark theme */
-  --bs-body-bg: #000000;        /* Changed body background to black for dark theme */
+  --bs-body-color: #ccc;
+  --bs-body-bg: #222;
 }
 
 .table {
-  --bs-table-bg: transparent;
-  --bs-table-accent-bg: transparent;
-  --bs-table-striped-color: #ffffff;                /* Changed table striped color to white for dark theme */
-  --bs-table-striped-bg: rgba(255, 255, 255, 0.05); /* Changed table striped background to a light shade of white for dark theme */
-  --bs-table-active-color: #ffffff;                 /* Changed table active color to white for dark theme */
-  --bs-table-active-bg: rgba(255, 255, 255, 0.1);   /* Changed table active background to a light shade of white for dark theme */
-  --bs-table-hover-color: #ffffff;                  /* Changed table hover color to white for dark theme */
-  --bs-table-hover-bg: rgba(255, 255, 255, 0.075);  /* Changed table hover background to a light shade of white for dark theme */
-  color: #ffffff;                                   /* Changed text color to white for dark theme */
-  border-color: #343a40                             /* Changed border color to a darker shade for dark theme */
+  --bs-table-striped-color: #ffffff;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+  --bs-table-active-color: #ffffff;
+  --bs-table-active-bg: rgba(255, 255, 255, 0.1);
+  --bs-table-hover-color: #ffffff;
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.075);
+  color: #ccc;
+  border-color: #343a40
 }
