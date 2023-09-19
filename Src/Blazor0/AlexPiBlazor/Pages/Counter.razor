@@ -14,5 +14,19 @@
     private void IncrementCount()
     {
         currentCount++;
+
+    // store the current count in the localStorage 
+// so that it can be retrieved when the page is refreshed
+// https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-5.0&pivots=server#local-storage-1
+        localStorage.SetItemAsync("currentCount", currentCount);
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // retrieve the current count from the localStorage
+        // https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-5.0&pivots=server#local-storage-1
+        currentCount = await localStorage.GetItemAsync<int>("currentCount");
+    }
+  }
 }
+//todo: https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-7.0&pivots=server#browser-storage-server
