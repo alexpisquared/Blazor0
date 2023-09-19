@@ -1,4 +1,6 @@
 ﻿@page "/counter"
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Counter</PageTitle>
 
@@ -9,24 +11,26 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int currentCount = 0;
+  private int currentCount = 0;
 
-    private void IncrementCount()
-    {
-        currentCount++;
+  async Task IncrementCount()
+  {
+    currentCount++;
 
-    // store the current count in the localStorage 
-// so that it can be retrieved when the page is refreshed
-// https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-5.0&pivots=server#local-storage-1
-        localStorage.SetItemAsync("currentCount", currentCount);
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        // retrieve the current count from the localStorage
-        // https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-5.0&pivots=server#local-storage-1
-        currentCount = await localStorage.GetItemAsync<int>("currentCount");
-    }
+    // Store the value of currentCount in localStorage
+    await JSRuntime.InvokeVoidAsync("localStorage.setItem", "currentCount", currentCount);
+    //await localStorage.SetItemAsync("currentCount", currentCount);
   }
+
+  protected override async Task OnInitializedAsync()
+  {
+    // retrieve the current count from the localStorage
+    // https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-5.0&pivots=server#local-storage-1
+    // currentCount = await localStorage.GetItemAsync<int>("currentCount");
+  }
+  //todo: https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-7.0&pivots=server#browser-storage-server
+
+  // Based on the code, it seems like the localStorage object is undefined. This can lead to a runtime error when the localStorage object is being used. Please make sure that the following namespace is included in your file:
+  // @using Microsoft.JSInterop. It is also possible that the JSRuntime object is undefined. If that is the case, you can include the following line of code in your file:
+  // @inject IJSRuntime JSRuntime. Please note that this comes with the assumption that you are using Blazor WebAssembly.
 }
-//todo: https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-7.0&pivots=server#browser-storage-server
