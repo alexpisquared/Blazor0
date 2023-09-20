@@ -29,15 +29,33 @@
   </main>
 </div>
 
+
 @code {
-  private bool _isDarkTheme = false;
+  private bool isDarkTheme = false;
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if ((bool.TryParse((await JSRuntime.InvokeAsync<object>("localStorage.getItem", "isDarkTheme"))?.ToString() ?? "true", out var storedTheme)) ? storedTheme : true)
+      await ToggleTheme();
+  }
 
   private async Task ToggleTheme()
   {
-    _isDarkTheme = !_isDarkTheme;
-    if (_isDarkTheme)
-      await JSRuntime.InvokeVoidAsync("addCSS", "css/darktheme.css");
-    else
-      await JSRuntime.InvokeVoidAsync("removeCSS", "css/darktheme.css");
+    isDarkTheme = !isDarkTheme;
+    await JSRuntime.InvokeVoidAsync(isDarkTheme ? "addCSS" : "removeCSS", "css/darktheme.css");
+    await JSRuntime.InvokeVoidAsync("localStorage.setItem", "isDarkTheme", isDarkTheme);
   }
+
+  // private bool _isDarkTheme = false;
+
+  // private async Task ToggleTheme()
+  // {
+  //   _isDarkTheme = !_isDarkTheme;
+  //   if (_isDarkTheme)
+  //     await JSRuntime.InvokeVoidAsync("addCSS", "css/darktheme.css");
+  //   else
+  //     await JSRuntime.InvokeVoidAsync("removeCSS", "css/darktheme.css");
+  // }
 }
