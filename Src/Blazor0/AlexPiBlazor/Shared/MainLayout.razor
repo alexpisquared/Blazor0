@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Diagnostics;
+@inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
 
 <PageTitle>AlexPiBlazor</PageTitle>
@@ -29,33 +30,27 @@
   </main>
 </div>
 
-
 @code {
-  private bool isDarkTheme = false;
-
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
 
-    if ((bool.TryParse((await JSRuntime.InvokeAsync<object>("localStorage.getItem", "isDarkTheme"))?.ToString() ?? "true", out var storedTheme)) ? storedTheme : true)
-      await ToggleTheme();
+    if ((bool.TryParse((await JSRuntime.InvokeAsync<object>("localStorage.getItem", "isDarkTheme"))?.ToString() ?? "true", out var storedThemeIsDark)))
+      if (storedThemeIsDark && _isDarkTheme == false)
+      {
+        Trace.WriteLine($"{firstRender,-5} {storedThemeIsDark,-5} => {_isDarkTheme,-5}  CHANGING...");
+        await ToggleTheme();
+      }
+      else
+        Trace.WriteLine($"{firstRender,-5} {storedThemeIsDark,-5} => {_isDarkTheme,-5}  staying as is.");
   }
+
+  private bool _isDarkTheme = false; //todo: default to dark theme to prevent flash of light theme!
 
   private async Task ToggleTheme()
   {
-    isDarkTheme = !isDarkTheme;
-    await JSRuntime.InvokeVoidAsync(isDarkTheme ? "addCSS" : "removeCSS", "css/darktheme.css");
-    await JSRuntime.InvokeVoidAsync("localStorage.setItem", "isDarkTheme", isDarkTheme);
+    _isDarkTheme = !_isDarkTheme;
+    await JSRuntime.InvokeVoidAsync(_isDarkTheme ? "addCSS" : "removeCSS", "css/darktheme.css");
+    await JSRuntime.InvokeVoidAsync("localStorage.setItem", "isDarkTheme", _isDarkTheme);
   }
-
-  // private bool _isDarkTheme = false;
-
-  // private async Task ToggleTheme()
-  // {
-  //   _isDarkTheme = !_isDarkTheme;
-  //   if (_isDarkTheme)
-  //     await JSRuntime.InvokeVoidAsync("addCSS", "css/darktheme.css");
-  //   else
-  //     await JSRuntime.InvokeVoidAsync("removeCSS", "css/darktheme.css");
-  // }
 }
